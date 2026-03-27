@@ -1,0 +1,10 @@
+### Test Analyze Prescription
+POST http://127.0.0.1:8000/analyze-prescription
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="prescription.png"
+Content-Type: image/png
+
+< ./data/prescription.png
+--boundary--
