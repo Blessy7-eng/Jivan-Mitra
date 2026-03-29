@@ -35,6 +35,7 @@ Jivan-Mitra/
 │   └── package.json    # Node.js dependencies
 ├── .gitignore          # Security (hides API keys & node_modules)
 └── README.md           # Project Documentation
+```
 
 ## ⚙️ Installation & Setup
 
