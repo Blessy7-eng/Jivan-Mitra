@@ -56,7 +56,7 @@ npm run dev
 ### 3. WhatsApp Tunneling
 Start Ngrok: ngrok http 8000
 
-Update Twilio Sandbox: Set the Webhook URL to https://your-ngrok-url.app/whatsapp (ensure it is set to POST).
+Update Twilio Sandbox: Set the Webhook URL to (https://your-ngrok-url.app/whatsapp) (ensure it is set to POST).
 
 **💡 Technical Innovation**
 For this hackathon, we focused on Gemini 2.0 Flash's multimodal capabilities. Most rural patients struggle to read doctor's handwriting. Our system processes these images, converts them into structured JSON data, and then re-interprets that data into a friendly, localized explanation. This converts a "confusing paper" into a "clear digital plan."
@@ -65,3 +65,6 @@ For this hackathon, we focused on Gemini 2.0 Flash's multimodal capabilities. Mo
 Blessy Waydande – Full Stack Developer & Cybersecurity (PVPIT, Budhgaon)
 
 Prachi Suryawanshi – Frontend & UI/UX Design (PVPIT, Budhgaon)
+
+**📺 Demo Video**
+[![Jivan-Mitra Demo Video](https://img.shields.io/badge/Watch-Demo_Video-red?style=for-the-badge&logo=youtube)](https://go.screenpal.com/watch/cOeUDfnTtMC)
