@@ -7,7 +7,6 @@ from google.genai import types
 from dotenv import load_dotenv
 import json
 
-# Twilio integration for WhatsApp
 from twilio.twiml.messaging_response import MessagingResponse
 
 load_dotenv()
@@ -41,11 +40,9 @@ def safe_json_parse(text):
 async def root():
     return {"message": "Jivan-Mitra Backend Active"}
 
-# --- FIXED: WHATSAPP SANDBOX ENDPOINT ---
 @app.post("/whatsapp")
 async def whatsapp_reply(Body: str = Form(...), From: str = Form(...)):
     try:
-        # Correct configuration for the NEW SDK
         config = types.GenerateContentConfig(
             system_instruction="You are Jivan-Mitra, a compassionate medical assistant. Reply concisely in the language the user is speaking (Marathi, Hindi, or English)."
         )
@@ -59,17 +56,14 @@ async def whatsapp_reply(Body: str = Form(...), From: str = Form(...)):
         twiml = MessagingResponse()
         twiml.message(response.text)
         
-        # Twilio requires 'text/xml' or 'application/xml'
         return Response(content=str(twiml), media_type="application/xml")
     
     except Exception as e:
         print(f"CRITICAL WhatsApp Error: {e}")
         twiml = MessagingResponse()
-        # For hackathon debugging, change this to {e} to see the real error on your phone
         twiml.message("Jivan-Mitra is currently busy. Please try again in a moment.")
         return Response(content=str(twiml), media_type="application/xml")
 
-# --- FIXED: CHATBOT ENDPOINT (Web) ---
 @app.post("/chat")
 async def chat_endpoint(data: dict):
     user_msg = data.get("message")
@@ -90,7 +84,6 @@ async def chat_endpoint(data: dict):
         print(f"Chat Error: {e}")
         return {"response": f"Error: {str(e)}"}
 
-# --- FIXED: PRESCRIPTION ANALYSIS ---
 @app.post("/analyze-prescription")
 async def analyze_prescription(file: UploadFile = File(...)):
     temp_path = f"temp_{file.filename}"
@@ -103,7 +96,6 @@ async def analyze_prescription(file: UploadFile = File(...)):
 
         prompt = "Extract medicines from this prescription. Return ONLY a JSON list of objects with 'name', 'use', and 'dosage'."
         
-        # New SDK multimodal format
         response = client.models.generate_content(
             model=MODEL_ID,
             contents=[
@@ -122,5 +114,4 @@ async def analyze_prescription(file: UploadFile = File(...)):
 
 if __name__ == "__main__":
     import uvicorn
-    # Use port 8000 for your Ngrok tunnel
     uvicorn.run(app, host="0.0.0.0", port=8000)
