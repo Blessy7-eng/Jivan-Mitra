@@ -4,7 +4,6 @@ import { Upload, Loader2, CheckCircle2, ClipboardCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState, useRef } from 'react';
 
-// 1. Define the interface for the component props
 interface ScannerProps {
   onAnalysisComplete: (data: any) => void;
 }
@@ -27,12 +26,10 @@ export default function PrescriptionScanner({ onAnalysisComplete }: ScannerProps
     if (!file) return;
     setLoading(true);
 
-    // 2. Prepare the file for the backend
     const formData = new FormData();
     formData.append("file", file);
 
     try {
-      // 3. Connect to your FastAPI server (Port 8000)
       const response = await fetch("http://127.0.0.1:8000/analyze-prescription", {
         method: "POST",
         body: formData,
@@ -44,13 +41,11 @@ export default function PrescriptionScanner({ onAnalysisComplete }: ScannerProps
 
       if (result.status === "success") {
         setAnalyzed(true);
-        // 4. Send the medicine list back to page.tsx
         onAnalysisComplete(result.medicines);
       }
     } catch (error) {
       console.error("Error details:", error);
       
-      // Fixed Alert: Now correctly references Port 8000
       if (error instanceof TypeError && error.message === "Failed to fetch") {
         alert("CONNECTION ERROR: Is your Python backend running on Port 8000?");
       } else {
@@ -59,7 +54,7 @@ export default function PrescriptionScanner({ onAnalysisComplete }: ScannerProps
     } finally {
       setLoading(false);
     }
-  }; // Fixed: Removed the extra brace that was here
+  }; 
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
