@@ -85,7 +85,6 @@ export default function SOSEmergency() {
                 />
               </div>
 
-              {/* Fixed Styling: Replaced borderOpacity with border-blue-500/20 class */}
               <div className="bg-blue-50 border border-blue-500/20 rounded-2xl p-4 text-sm text-slate-700 flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-blue-600 shrink-0" strokeWidth={2} />
                 <p className="font-medium leading-relaxed">
