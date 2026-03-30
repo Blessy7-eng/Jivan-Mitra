@@ -10,7 +10,6 @@ import PrescriptionScanner from '@/components/PrescriptionScanner';
 import Chatbot from '@/components/Chatbot';
 import SOSEmergency from '@/components/SOSEmergency';
 
-// --- FIXED: Re-added missing Interfaces ---
 interface UserData {
   name: string;
   identifier: string;
