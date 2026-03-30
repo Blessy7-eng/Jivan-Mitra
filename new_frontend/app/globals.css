@@ -171,17 +171,15 @@
   }
 }
 
-/* Defines the UpDown bounce effect */
 @keyframes upDownBounce {
   0%, 100% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-8px); /* Moves up by 8 pixels */
+    transform: translateY(-8px);
   }
 }
 
-/* Class to apply the animation */
 .animate-up-down {
   animation: upDownBounce 2s ease-in-out infinite;
 }
