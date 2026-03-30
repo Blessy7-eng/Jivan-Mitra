@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 from google.genai import Client as GoogleClient
 from supabase import create_client
 
-# 1. Initialization
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
 client = GoogleClient(api_key=api_key)
@@ -15,7 +14,6 @@ def get_nlem_context(medicine_names):
     """Retrieves matching medical guidelines from Supabase Vector Store."""
     print(f"🧠 Encoding '{medicine_names}' into vectors...")
     
-    # Embedding model is stable
     response = client.models.embed_content(
         model="gemini-embedding-001",
         contents=medicine_names,
@@ -40,7 +38,6 @@ def jivan_mitra_full_check(image_path):
         print(f"\n[1/3] 📸 Scanning: {image_path}...")
         img = PIL.Image.open(image_path)
         
-        # FIX: Using 'gemini-1.5-flash-latest' for better compatibility
         vision_res = client.models.generate_content(
             model="gemini-2.5-flash", 
             contents=["List the medicine names in this image, separated by commas.", img]
@@ -60,7 +57,6 @@ def jivan_mitra_full_check(image_path):
 
         print("🤖 Compiling Verification Report...")
 
-        # ADD THE IMPROVED FINAL PROMPT HERE
         final_prompt = f"""
         You are Jivan-Mitra, a Clinical Pharmacist assistant. 
         Task: Verify if the prescribed medicines (or their generic equivalents) are in the NLEM 2022 list.
@@ -77,7 +73,6 @@ def jivan_mitra_full_check(image_path):
         Note: If a brand name like 'Amphogel' is used, check if its generic 'Aluminum Hydroxide' appears in the context.
         """
 
-        # FIX: Using 'gemini-2.0-flash' for the reasoning part
         final_res = client.models.generate_content(
             model="gemini-2.5-flash", 
             contents=final_prompt
